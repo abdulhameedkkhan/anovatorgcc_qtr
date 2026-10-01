@@ -11,6 +11,8 @@ class Catalog
             'm3' => self::m3(),
             'm1' => self::m1(),
             'm0' => self::m0(),
+            'p5' => self::p5(),
+            'm2-pro' => self::m2Pro(),
         ];
     }
 
@@ -51,60 +53,70 @@ class Catalog
                 'number' => '01',
                 'title' => 'Healthcare Facilities',
                 'text' => 'Faster initial assessments with digital reports that support patient communication and structured follow-up.',
+                'icon' => 'home/sector-logos/healthcare.png',
             ],
             [
                 'slug' => 'nutrition',
                 'number' => '02',
                 'title' => 'Nutrition & Dietetics Clinics',
                 'text' => 'Body composition measurements beyond weight and BMI to support more personalized nutrition planning.',
+                'icon' => 'home/sector-logos/nutrition.png',
             ],
             [
                 'slug' => 'sports',
                 'number' => '03',
                 'title' => 'Sports Clubs & Training Centers',
                 'text' => 'Evidence-based training follow-up through detailed reports covering muscle mass, fat percentage, posture assessment, and balance.',
+                'icon' => 'home/sector-logos/sports.png',
             ],
             [
                 'slug' => 'pharmacies',
                 'number' => '04',
                 'title' => 'Pharmacies',
                 'text' => 'Fast assessment services that add consultative value and support better customer guidance.',
+                'icon' => 'home/sector-logos/pharmacies.png',
             ],
             [
                 'slug' => 'aesthetic',
                 'number' => '05',
                 'title' => 'Aesthetic & Body Contouring Clinics',
                 'text' => 'More precise measurement and documentation of body shape and body composition changes, with comparable results.',
+                'icon' => 'home/sector-logos/aesthetic.png',
             ],
             [
                 'slug' => 'education',
                 'number' => '06',
                 'title' => 'Educational Institutions & Student Health',
                 'text' => 'Safe health assessment supporting school health programs, early screening, and healthier lifestyle awareness.',
+                'icon' => 'home/sector-logos/schools.png',
             ],
             [
                 'slug' => 'rehab',
                 'number' => '07',
                 'title' => 'Physical Therapy & Sports Rehabilitation',
                 'text' => 'Track and document recovery progress through posture assessment, balance, and mobility improvement over time.',
+                'icon' => 'home/sector-logos/rehabilitation.png',
             ],
             [
                 'slug' => 'wellness',
                 'number' => '08',
                 'title' => 'Wellness Centers',
                 'text' => 'A more professional wellness experience, with reports that support program personalization and progress tracking.',
+                'icon' => 'home/sector-logos/wellness.png',
             ],
             [
                 'slug' => 'home',
                 'number' => '09',
                 'title' => 'Home Use & Family Health Monitoring',
                 'text' => 'Practical and convenient at-home assessment to monitor key health indicators for every family member.',
+                'icon' => 'home/sector-logos/home.png',
             ],
             [
                 'slug' => 'corporate',
                 'number' => '10',
                 'title' => 'Employee Health & Wellbeing Programs',
                 'text' => 'Structured employee health assessments that support workplace wellness initiatives, preventive awareness, and a healthier, more productive work environment.',
+                'icon' => 'home/sector-logos/employee-health.png',
             ],
         ];
     }
@@ -193,12 +205,12 @@ class Catalog
     public static function journey(): array
     {
         return [
-            ['n' => '01', 'title' => 'Start the Assessment', 'text' => 'The user stands in front of the system to begin a fast, structured session.'],
-            ['n' => '02', 'title' => 'Comprehensive 3D Scan', 'text' => 'Millimeter-level visual body scanning for dimensions and circumferences.'],
-            ['n' => '03', 'title' => 'Direct Analysis', 'text' => '8-electrode multi-frequency BIA for body composition in under 60 seconds.'],
-            ['n' => '04', 'title' => 'Integrated Assessment', 'text' => 'Posture, balance, and selected health indicators in one workflow.'],
-            ['n' => '05', 'title' => 'Report in 30 Seconds', 'text' => 'Clear, easy-to-read results designed for professional explanation.'],
-            ['n' => '06', 'title' => 'Instant Access', 'text' => 'QR code access for report review and follow-up in the free app.'],
+            ['n' => '01', 'title' => 'Start the Assessment', 'text' => 'The user stands in front of the system to begin a fast, structured assessment.'],
+            ['n' => '02', 'title' => 'Comprehensive 3D Scan', 'text' => '3D visual body scanning.'],
+            ['n' => '03', 'title' => 'Direct Analysis', 'text' => '8-electrode BIA body composition analysis.'],
+            ['n' => '04', 'title' => 'Comprehensive assessment', 'text' => 'Advanced measurement of vital indicators, posture, balance, and body composition.'],
+            ['n' => '05', 'title' => 'Report in 30 Seconds', 'text' => 'Clear, easy-to-read results.'],
+            ['n' => '06', 'title' => 'Instant Access', 'text' => 'QR code access for report review and follow-up.'],
         ];
     }
 
@@ -249,7 +261,7 @@ class Catalog
                     'type' => 'News',
                     'title' => $article['title'],
                     'text' => $article['excerpt'],
-                    'url' => route('news.show', $article['slug']),
+                    'url' => route('blog.show', $article['slug']),
                 ];
             }
         }
@@ -258,20 +270,23 @@ class Catalog
             $haystack = mb_strtolower($industry['title'].' '.$industry['text']);
             if (str_contains($haystack, $query)) {
                 $hits[] = [
-                    'type' => 'Industry',
+                    'type' => 'Sector',
                     'title' => $industry['title'],
                     'text' => $industry['text'],
-                    'url' => route('industries').'#'.$industry['slug'],
+                    'url' => route('solutions').'#'.$industry['slug'],
                 ];
             }
         }
 
         $pages = [
-            ['type' => 'Page', 'title' => 'Company', 'text' => 'About Anovator GCC, corporate values, and regional partnership', 'url' => route('company'), 'keys' => 'company about values partner'],
+            ['type' => 'Page', 'title' => 'About Us', 'text' => 'About Anovator GCC, corporate values, and regional partnership', 'url' => route('about'), 'keys' => 'company about values partner'],
+            ['type' => 'Page', 'title' => 'Sectors We Serve', 'text' => 'Industries and sectors served by Anovator across the GCC', 'url' => route('solutions'), 'keys' => 'sectors industries healthcare sports'],
+            ['type' => 'Page', 'title' => 'Business Solutions', 'text' => 'Tailored B2B solutions for businesses, institutions, and government', 'url' => route('business'), 'keys' => 'business b2b roi procurement'],
             ['type' => 'Page', 'title' => 'Support', 'text' => 'Technical service, training, and warranty across the GCC', 'url' => route('support'), 'keys' => 'support service training warranty help'],
             ['type' => 'Page', 'title' => 'FAQ', 'text' => 'Frequently asked questions about Anovator systems', 'url' => route('faq'), 'keys' => 'faq questions help'],
+            ['type' => 'Page', 'title' => 'Blog', 'text' => 'Articles and insights on body composition analysis', 'url' => route('blog.index'), 'keys' => 'blog news articles'],
             ['type' => 'Page', 'title' => 'Product finder', 'text' => 'Find the right Anovator system for your facility', 'url' => route('finder'), 'keys' => 'finder product find compare'],
-            ['type' => 'Page', 'title' => 'Contact', 'text' => 'Request a demo or speak with Anovator GCC', 'url' => route('contact'), 'keys' => 'contact demo email phone'],
+            ['type' => 'Page', 'title' => 'Contact Us', 'text' => 'Request a demo or speak with Anovator GCC', 'url' => route('contact'), 'keys' => 'contact demo email phone'],
         ];
 
         foreach ($pages as $page) {
@@ -297,7 +312,7 @@ class Catalog
             'name' => 'Anovator A5',
             'tag' => 'Intelligent & Visionary',
             'headline' => 'A leading all-in-one platform for advanced health assessment',
-            'summary' => 'The flagship system for facilities that need comprehensive assessment: body composition, posture, selected vital indicators, and digital follow-up in one platform.',
+            'summary' => 'Meet the next generation of body analysis systems. Faster results, clearer insight, smarter assessment — body composition, posture, selected vital indicators, and digital follow-up in one platform.',
             'ideal' => 'Full health analysis',
             'display' => '32" IPS HD (1920 × 1080)',
             'method' => '8-point BIA',
@@ -425,6 +440,80 @@ class Catalog
                 'Age range' => '3–99 years',
                 'Additional measurements' => 'Core body composition metrics',
                 'Reporting' => 'Phone / paper print / web',
+            ],
+        ];
+    }
+
+    private static function p5(): array
+    {
+        return [
+            'slug' => 'p5',
+            'code' => 'P5',
+            'name' => 'Anovator P5',
+            'tag' => 'Athletic & Dynamic',
+            'headline' => 'Advanced sports performance assessment',
+            'summary' => 'Anovator P5 is designed for facilities that want to go beyond standard body composition assessment and integrate performance testing into a single, advanced workflow. It supports smarter training decisions, broader physical assessments, and structured performance follow-up over time.',
+            'ideal' => 'Sports performance',
+            'display' => '27" 4K (4096 × 2160)',
+            'method' => '8-point BIA + AI vision',
+            'frequencies' => '20 / 100 / 250 kHz',
+            'weight' => '—',
+            'range' => '10–250 kg',
+            'extra' => 'Grip strength, power tests, exercise safety',
+            'features' => [
+                'Sports Performance Assessment',
+                'Physical Performance Testing',
+                'Training Decision Support',
+                'Performance Follow-Up',
+            ],
+            'specs' => [
+                'Display' => '27" 4K touch (4096 × 2160)',
+                'Measurement method' => '8-electrode multi-frequency BIA + 20MP AI vision',
+                'Frequencies' => '20 / 100 / 250 kHz',
+                'Measuring range' => '10–250 kg',
+                'AI vision system' => '20MP camera, skeletal tracking, body segmentation',
+                'Assessment functions' => 'Body composition, posture, grip strength, upper-body strength, lower-body power, vital capacity, exercise safety, balance, agile response',
+                'Device dimensions' => '870 × 550 × 1800 mm',
+                'External interface' => 'USB Host ×2, LAN ×1',
+                'Power consumption' => '60 W',
+                'Working distance' => '1 m',
+                'Reporting' => 'Digital & printed reports',
+            ],
+        ];
+    }
+
+    private static function m2Pro(): array
+    {
+        return [
+            'slug' => 'm2-pro',
+            'code' => 'M2 Pro',
+            'name' => 'Anovator M2 Pro',
+            'tag' => 'Visual & Measurable',
+            'headline' => '360° 3D imaging for body changes',
+            'summary' => 'Anovator M2 Pro is designed for facilities that want to document external body changes through 360° 3D imaging and precise measurements. It provides clear visual documentation that supports consultations and makes physical changes easier to present and explain.',
+            'ideal' => 'Visual documentation',
+            'display' => '21.5" IPS HD (1920 × 1080)',
+            'method' => 'DSM-BIA + AI 3D vision',
+            'frequencies' => '20 / 100 / 250 kHz',
+            'weight' => '—',
+            'range' => '—',
+            'extra' => '360° 3D imaging, posture, shoulder mobility',
+            'features' => [
+                '360° 3D Body Imaging',
+                'Precise Body Measurements',
+                'Visual Documentation',
+                'Clearer Presentation of Changes',
+            ],
+            'specs' => [
+                'Display' => '21.5" IPS HD touch (1920 × 1080)',
+                'Measurement method' => 'Direct segmental multi-frequency BIA (DSM-BIA)',
+                'Frequencies' => '20 / 100 / 250 kHz',
+                '3D imaging' => 'AI binocular 3D visual recognition, 360° body imaging',
+                'Assessment functions' => 'Body composition, body dimensions, posture, 360° 3D imaging, shoulder mobility, weight',
+                'Device dimensions' => '447 × 346 × 1634 mm',
+                'Electric current' => '< 280 µA',
+                'Operating system' => 'Android',
+                'Reporting' => 'Digital & printed reports',
             ],
         ];
     }

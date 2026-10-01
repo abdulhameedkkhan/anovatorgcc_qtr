@@ -4,7 +4,7 @@
 @section('description', 'Frequently asked questions about Anovator body composition analysis systems, reports, Arabic support, installation, and warranty.')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/tile-lab.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / FAQ</p>
     <p class="kicker">FAQ</p>
     <h1>Everything You Need to Know</h1>

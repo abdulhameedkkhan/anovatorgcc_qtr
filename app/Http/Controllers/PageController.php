@@ -7,9 +7,9 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    public function company(): View
+    public function about(): View
     {
-        return view('company.index', [
+        return view('about.index', [
             'stats' => Catalog::stats(),
         ]);
     }
@@ -19,10 +19,17 @@ class PageController extends Controller
         return view('support.index');
     }
 
-    public function industries(): View
+    public function solutions(): View
     {
-        return view('industries.index', [
+        return view('solutions.index', [
             'industries' => Catalog::industries(),
+        ]);
+    }
+
+    public function business(): View
+    {
+        return view('business.index', [
+            'stats' => Catalog::stats(),
         ]);
     }
 

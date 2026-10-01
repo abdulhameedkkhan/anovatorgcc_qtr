@@ -1,20 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'News · Anovator GCC')
-@section('description', 'News from Anovator GCC on body composition assessment systems, regional support, and product updates.')
+@section('title', 'Blog — Body Analysis & Gulf Health | Anovator')
+@section('description', 'Articles and insights on body composition analysis and health facility management in the Gulf.')
 
 @section('content')
-<section class="page-hero">
-    <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / News</p>
-    <p class="kicker">Anovator News</p>
-    <h1>News from the company</h1>
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/news-1.jpg') }}')">
+    <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Blog</p>
+    <p class="kicker">Blog</p>
+    <h1>Articles &amp; Insights</h1>
+    <p>Tips and research on body composition analysis and health facility management in the Gulf.</p>
 </section>
 
 <section class="page-wrap">
     <div class="news-grid">
         @foreach($articles as $article)
-            <a class="news-card" href="{{ route('news.show', $article['slug']) }}">
-                <div class="news-photo" style="background-image:url('{{ asset('images/photos/'.$article['image']) }}')"></div>
+            <a class="news-card" href="{{ route('blog.show', $article['slug']) }}">
+                <div class="news-photo" style="background-image:url('{{ asset('images/photos/'.$article['image']) }}?v=7')"></div>
                 <p class="kicker" style="margin-top:16px">{{ $article['date'] }}</p>
                 <h3>{{ $article['title'] }}</h3>
             </a>

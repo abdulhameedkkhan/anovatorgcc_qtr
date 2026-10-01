@@ -4,7 +4,7 @@
 @section('description', 'Contact Anovator GCC in Qatar, UAE, Saudi Arabia, Bahrain, Kuwait, and Oman. Request a demo or a tailored consultation.')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/map.png') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Contact</p>
     <p class="kicker">Contact Us</p>
     <h1>Let Us Help You Choose the Right Solution</h1>
@@ -68,7 +68,7 @@
                     <label>Message</label>
                     <textarea name="message">{{ old('message') }}</textarea>
                 </div>
-                <button class="btn-solid" type="submit">Send request</button>
+                <button class="btn-solid" type="submit">Contact Anovator GCC →</button>
             </form>
         </div>
     </div>

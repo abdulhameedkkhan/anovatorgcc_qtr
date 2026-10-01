@@ -15,43 +15,41 @@
 
     <div class="header-inner">
         <nav class="main-nav" id="main-nav" aria-label="Primary">
+            <div class="nav-item">
+                <a class="nav-label {{ request()->routeIs('home') ? 'is-active' : '' }}" href="{{ route('home') }}">Home</a>
+            </div>
             <div class="nav-item has-menu">
                 <a class="nav-label {{ request()->routeIs('products.*') || request()->routeIs('finder') ? 'is-active' : '' }}" href="{{ route('products.index') }}">Products</a>
                 <div class="mega mega-cards">
                     <a class="mega-card" href="{{ route('products.index') }}">
-                        <span class="mega-card-img" style="background-image:url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80')"></span>
+                        <span class="mega-card-img" style="background-image:url('{{ asset('images/photos/mega-products.jpg') }}?v=7')"></span>
                         <span class="mega-card-title">All products</span>
                     </a>
-                    <a class="mega-card" href="{{ route('finder') }}">
-                        <span class="mega-card-img" style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80')"></span>
-                        <span class="mega-card-title">Product finder</span>
-                    </a>
-                    <a class="mega-card" href="{{ route('products.index') }}#bia">
-                        <span class="mega-card-img" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80')"></span>
-                        <span class="mega-card-title">BIA solutions</span>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-item has-menu">
-                <a class="nav-label {{ request()->routeIs('company') || request()->routeIs('industries') || request()->routeIs('news.*') ? 'is-active' : '' }}" href="{{ route('company') }}">Company</a>
-                <div class="mega mega-list">
-                    <a href="{{ route('company') }}">Overview</a>
-                    <a href="{{ route('company') }}#values">Corporate values</a>
-                    <a href="{{ route('industries') }}">Industries we serve</a>
-                    <a href="{{ route('news.index') }}">News</a>
-                </div>
-            </div>
-            <div class="nav-item has-menu">
-                <a class="nav-label {{ request()->routeIs('support') || request()->routeIs('faq') ? 'is-active' : '' }}" href="{{ route('support') }}">Support</a>
-                <div class="mega mega-list">
-                    <a href="{{ route('support') }}">Technical service</a>
-                    <a href="{{ route('support') }}#training">Training</a>
-                    <a href="{{ route('support') }}#warranty">Warranty</a>
-                    <a href="{{ route('faq') }}">FAQ</a>
+                    @foreach($navProducts as $product)
+                        <a class="mega-card" href="{{ route('products.show', $product['slug']) }}">
+                            <span class="mega-card-img mega-card-img-product" style="background-image:url('{{ asset('images/products/'.$product['slug'].'/1.png') }}?v=7')"></span>
+                            <span class="mega-card-title">{{ $product['name'] }}</span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
             <div class="nav-item">
-                <a class="nav-label {{ request()->routeIs('contact*') ? 'is-active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                <a class="nav-label {{ request()->routeIs('solutions') || request()->routeIs('industries') ? 'is-active' : '' }}" href="{{ route('solutions') }}">Sectors We Serve</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-label {{ request()->routeIs('about') || request()->routeIs('company') ? 'is-active' : '' }}" href="{{ route('about') }}">About Us</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-label {{ request()->routeIs('business') ? 'is-active' : '' }}" href="{{ route('business') }}">Tailored Business Solutions</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-label {{ request()->routeIs('faq') ? 'is-active' : '' }}" href="{{ route('faq') }}">FAQ</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-label {{ request()->routeIs('blog.*') || request()->routeIs('news.*') ? 'is-active' : '' }}" href="{{ route('blog.index') }}">Blog</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-label nav-label-pill {{ request()->routeIs('contact*') ? 'is-active' : '' }}" href="{{ route('contact') }}">Contact Us</a>
             </div>
         </nav>
 
@@ -68,8 +66,8 @@
         </div>
 
         <a class="brand" href="{{ route('home') }}" aria-label="Anovator GCC home">
-            <span class="brand-mark">anovator</span>
-            <span class="brand-claim">Advanced Body Analysis</span>
+            <img class="brand-logo" src="{{ asset('images/logo.svg') }}?v=7" alt="Anovator" width="180" height="28">
+            <span class="brand-claim">Advanced Body Analysis &amp; Health Assessment</span>
         </a>
     </div>
 </header>

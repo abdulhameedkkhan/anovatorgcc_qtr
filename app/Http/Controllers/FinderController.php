@@ -20,10 +20,14 @@ class FinderController extends Controller
 
             if ($focus === 'full' || $scale === 'flagship') {
                 $slug = 'a5';
+            } elseif ($focus === 'visual') {
+                $slug = 'm2-pro';
+            } elseif ($focus === 'performance') {
+                $slug = 'p5';
+            } elseif ($focus === 'progress') {
+                $slug = $facility === 'fitness' ? 'p5' : 'm1';
             } elseif ($focus === 'essential' || $scale === 'compact') {
                 $slug = $facility === 'fitness' ? 'm1' : 'm0';
-            } elseif ($focus === 'progress') {
-                $slug = 'm1';
             }
 
             $recommendation = Catalog::product($slug);

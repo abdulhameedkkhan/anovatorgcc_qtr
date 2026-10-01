@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title', 'Products · Anovator GCC')
-@section('description', 'Explore Anovator A5, M3, M1, and M0 body composition analysis systems for professional assessment.')
+@section('description', 'Explore Anovator A5, M3, M1, M0, P5, and M2 Pro body composition analysis systems for professional assessment.')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/hero-2.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Products</p>
     <p class="kicker">Products</p>
     <h1>Smart Body Composition Analysis Systems</h1>
-    <p>Advanced assessment technology for professional use. Multi-category systems designed to support professional assessment, digital reporting, and smoother user experiences.</p>
+    <p>Advanced assessment technology for professional use. Multi-category systems designed to support professional assessment, digital reporting, and smoother user experiences across different service environments.</p>
 </section>
 
 <section class="page-wrap" id="bia">

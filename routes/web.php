@@ -15,11 +15,18 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
-Route::get('/company', [PageController::class, 'company'])->name('company');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/company', [PageController::class, 'about'])->name('company');
+
+Route::get('/solutions', [PageController::class, 'solutions'])->name('solutions');
+Route::get('/industries', [PageController::class, 'solutions'])->name('industries');
+
+Route::get('/business', [PageController::class, 'business'])->name('business');
 Route::get('/support', [PageController::class, 'support'])->name('support');
-Route::get('/industries', [PageController::class, 'industries'])->name('industries');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
+Route::get('/blog', [NewsController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [NewsController::class, 'show'])->name('blog.show');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
 

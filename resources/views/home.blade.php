@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Anovator GCC | Medical measurement systems')
-@section('description', 'Advanced 8-electrode BIA body composition analysis systems for professional use across the GCC. Explore Anovator A5, M3, M1, and M0.')
+@section('title', 'ANOVATOR GCC | Advanced Body Analysis & Health Assessment Systems')
+@section('description', 'Smart solutions combining body composition analysis, posture assessment, selected health indicator assessments, and digital reporting for professional use.')
+@section('body_class', 'page-home')
 
 @section('content')
 <section class="hero" aria-label="Featured systems">
@@ -9,38 +10,46 @@
         <div class="hero-viewport">
             <div class="hero-track" id="hero-track">
                 <a class="hero-slide is-active" href="{{ route('products.show', 'a5') }}">
-                    <img src="{{ asset('images/slider/slide-1.jpg') }}?v=2" alt="Anovator A5" width="1170" height="500">
+                    <img src="{{ asset('images/slider/slide-1.jpg') }}?v=8" alt="Anovator A5 platform" width="1170" height="500">
                     <div class="hero-copy">
                         <div class="hero-copy-inner">
-                            <h2>Anovator A5</h2>
-                            <h3>The Game Changer in Patient Care</h3>
+                            <p class="hero-kicker">AI-Powered</p>
+                            <h2>Redefining the <em>Body Analysis</em> Experience</h2>
+                            <p class="hero-lead">Advanced assessment systems using 8-electrode BIA for body composition analysis, posture assessment, body dimensions, selected health indicators, and digital reporting — with a free mobile app and Arabic-language support.</p>
+                            <span class="hero-cta-link">Explore Our Systems</span>
                         </div>
                     </div>
                 </a>
-                <a class="hero-slide" href="{{ route('products.show', 'm3') }}">
-                    <img src="{{ asset('images/slider/slide-2.jpg') }}?v=2" alt="Anovator M3" width="1170" height="500">
+                <a class="hero-slide hero-slide-products" href="{{ route('products.index') }}">
+                    <img src="{{ asset('images/slider/slide-2.jpg') }}?v=8" alt="Anovator body composition systems" width="1170" height="500">
                     <div class="hero-copy">
                         <div class="hero-copy-inner">
-                            <h2>Anovator M3</h2>
-                            <h3>A New Dimension in Patient Care</h3>
+                            <p class="hero-kicker">Anovator A5</p>
+                            <h2>All-in-one health <em>assessment</em></h2>
+                            <p class="hero-lead">Faster results. Clearer insight. Smarter assessment for professional facilities.</p>
+                            <span class="hero-cta-link">Discover Anovator A5</span>
                         </div>
                     </div>
                 </a>
-                <a class="hero-slide" href="{{ route('products.index') }}#bia">
-                    <img src="{{ asset('images/slider/slide-3.jpg') }}?v=2" alt="BIA solutions" width="1170" height="500">
+                <a class="hero-slide hero-slide-products" href="{{ route('products.index') }}#bia">
+                    <img src="{{ asset('images/slider/slide-3.jpg') }}?v=8" alt="Smart body composition systems" width="1170" height="500">
                     <div class="hero-copy">
                         <div class="hero-copy-inner">
-                            <h2>BIA solutions</h2>
-                            <h3>Insights from the inside out</h3>
+                            <p class="hero-kicker">Product Range</p>
+                            <h2>Smart Body Composition <em>Systems</em></h2>
+                            <p class="hero-lead">Multi-category platforms designed for professional assessment, digital reporting, and smoother workflows.</p>
+                            <span class="hero-cta-link">View All Systems</span>
                         </div>
                     </div>
                 </a>
-                <a class="hero-slide" href="{{ route('finder') }}">
-                    <img src="{{ asset('images/slider/slide-4.jpg') }}?v=2" alt="Product finder" width="1170" height="500">
+                <a class="hero-slide hero-slide-map" href="{{ route('contact') }}">
+                    <img src="{{ asset('images/slider/slide-4.jpg') }}?v=8" alt="Anovator GCC global reach" width="1170" height="500">
                     <div class="hero-copy">
                         <div class="hero-copy-inner">
-                            <h2>Product finder</h2>
-                            <h3>Definitely the right product. Guaranteed!</h3>
+                            <p class="hero-kicker">GCC Coverage</p>
+                            <h2>Find the right <em>assessment</em> system</h2>
+                            <p class="hero-lead">Qatar · UAE · Saudi Arabia · Bahrain · Kuwait · Oman — request a demo with our regional team.</p>
+                            <span class="hero-cta-link">Request a Demo</span>
                         </div>
                     </div>
                 </a>
@@ -61,48 +70,6 @@
     </div>
 </section>
 
-<section class="tile-grid bento">
-    <a class="tile has-photo tile-featured" href="{{ route('products.show', 'a5') }}" style="background-image:url('{{ asset('images/photos/tile-clinic.jpg') }}')">
-        <div class="tile-visual">
-            @include('partials.device', ['model' => 'a5'])
-        </div>
-        <div class="tile-copy">
-            <h2>Anovator A5</h2>
-            <h3>Insights from the inside out</h3>
-        </div>
-    </a>
-    <a class="tile has-photo" href="{{ route('products.show', 'm3') }}" style="background-image:url('{{ asset('images/photos/tile-lab.jpg') }}')">
-        <div class="tile-visual">
-            @include('partials.device', ['model' => 'm3'])
-        </div>
-        <div class="tile-copy">
-            <h2>Anovator M3</h2>
-            <h3>A New Dimension in Patient Care</h3>
-        </div>
-    </a>
-    <a class="tile tile-finder" href="{{ route('finder') }}">
-        <div class="tile-visual tile-icon-visual">
-            <svg viewBox="0 0 280 220" aria-hidden="true">
-                <circle cx="132" cy="110" r="78" fill="none" stroke="#111315" stroke-width="1.4"/>
-                <circle cx="132" cy="110" r="48" fill="none" stroke="#111315" stroke-width="1.2"/>
-                <circle cx="132" cy="110" r="18" fill="none" stroke="#EF0A6A" stroke-width="2"/>
-                <path d="M186 164 L248 214" fill="none" stroke="#111315" stroke-width="3"/>
-                <circle cx="248" cy="214" r="6" fill="#EF0A6A"/>
-            </svg>
-        </div>
-        <div class="tile-copy">
-            <h2>Product finder</h2>
-            <h3>Definitely the right product. Guaranteed!</h3>
-        </div>
-    </a>
-    <a class="tile has-photo tile-service-photo" href="{{ route('support') }}" style="background-image:url('{{ asset('images/photos/tile-service.jpg') }}')">
-        <div class="tile-copy">
-            <h2>Anovator service</h2>
-            <h3>24/7 technical support across the GCC</h3>
-        </div>
-    </a>
-</section>
-
 <section class="stats-strip">
     @foreach($stats as $stat)
         <div class="stat-cell">
@@ -111,10 +78,12 @@
         </div>
     @endforeach
 </section>
+<p class="stats-trust" style="text-align:center;padding:8px 20px 28px;color:#5b6168;letter-spacing:.08em;font-size:12px;text-transform:uppercase">Trusted. Proven. Worldwide.</p>
 
 <section class="journey">
-    <p class="kicker">Assessment journey</p>
-    <h2>Designed to be fast, clear and seamless</h2>
+    <p class="kicker">Assessment Journey</p>
+    <h2>The Anovator Assessment Experience</h2>
+    <p style="max-width:640px;margin:0 auto 28px;text-align:center;color:#5b6168">Designed to be — Fast, Clear and Seamless.</p>
     <div class="journey-grid">
         @foreach($journey as $step)
             <article class="journey-step">
@@ -124,15 +93,28 @@
             </article>
         @endforeach
     </div>
+    <p style="max-width:720px;margin:28px auto 0;text-align:center;color:#5b6168">A professional assessment experience that builds confidence, supports follow-up, and elevates service value.</p>
 </section>
 
 <section class="industry-preview">
     <div class="industry-preview-inner">
-        <p class="kicker">Industries we serve</p>
-        <h2>One solution. Multiple sectors.</h2>
-        <div class="industry-preview-grid">
+        <div class="industry-preview-header">
+            <div>
+                <p class="kicker">Sectors We Serve</p>
+                <h2>One Solution. <em>Multiple Sectors</em></h2>
+            </div>
+        </div>
+        <div class="sector-controls" aria-label="Sector carousel controls">
+            <button type="button" class="sector-arrow sector-arrow-prev" data-sector="prev" aria-label="Previous sectors">‹</button>
+            <button type="button" class="sector-arrow sector-arrow-next" data-sector="next" aria-label="Next sectors">›</button>
+        </div>
+        <p class="industry-preview-subtitle">Anovator — Trusted by Professionals. Designed to elevate assessment quality.</p>
+        <div class="industry-preview-grid" id="industry-preview-grid">
             @foreach($industries as $industry)
-                <a href="{{ route('industries') }}#{{ $industry['slug'] }}">
+                <a href="{{ route('solutions') }}#{{ $industry['slug'] }}">
+                    @if(!empty($industry['icon']))
+                        <img class="industry-thumb" src="{{ asset('images/'.$industry['icon']) }}?v=5" alt="" width="72" height="72" loading="lazy">
+                    @endif
                     <span>{{ $industry['number'] }}</span>
                     <h3>{{ $industry['title'] }}</h3>
                     <p>{{ $industry['text'] }}</p>
@@ -140,27 +122,32 @@
             @endforeach
         </div>
         <div class="cta-row">
-            <a class="link-arrow" href="{{ route('industries') }}">View all industries</a>
+            <a class="link-arrow" href="{{ route('solutions') }}">View all sectors</a>
         </div>
     </div>
 </section>
 
 <section class="app-split">
     <div class="app-split-copy">
-        <p class="kicker">Free mobile app</p>
-        <h2>Clearer reports. Better follow-up.</h2>
-        <p>Users access results anytime on iOS and Android. Reports are visual, easy to explain, and built for visit-to-visit comparison.</p>
+        <p class="kicker">A free app for users</p>
+        <h2>Clearer Reports. Better Follow-Up.</h2>
+        <p>90% of users found traditional system reports difficult to understand, but found Anovator reports clear and easy to interpret.</p>
         <ul class="plus-list">
             <li>Clear reports designed for easy understanding</li>
-            <li>Access from mobile, iPad, and desktop</li>
-            <li>Compare progress over time</li>
-            <li>Arabic and English language support</li>
+            <li>Anytime, anywhere access to results and reports</li>
+            <li>Easy review, comparison, and ongoing follow-up of changes over time</li>
+            <li>A seamless and organized digital experience across mobile, iPad, and desktop</li>
+            <li>Available on iOS and Android</li>
         </ul>
         <div class="cta-row">
             <a class="link-arrow" href="{{ route('support') }}">Digital reporting &amp; support</a>
         </div>
     </div>
-    <div class="app-split-photo" style="background-image:url('{{ asset('images/photos/app.jpg') }}')"></div>
+    <div class="app-split-photo app-split-gallery">
+        <img src="{{ asset('images/photos/rapport-1.jpg') }}?v=5" alt="Anovator report sample 1" loading="lazy">
+        <img src="{{ asset('images/photos/rapport-2.jpg') }}?v=5" alt="Anovator report sample 2" loading="lazy">
+        <img src="{{ asset('images/photos/rapport-3.jpg') }}?v=5" alt="Anovator report sample 3" loading="lazy">
+    </div>
 </section>
 
 <section class="newsletter-block" id="newsletter">
@@ -224,12 +211,12 @@
 </section>
 
 <section class="news-block">
-    <p class="kicker">Anovator News</p>
-    <h2>News from the company</h2>
+    <p class="kicker">Blog</p>
+    <h2>Articles &amp; Insights</h2>
     <div class="news-grid">
         @foreach($news as $article)
-            <a class="news-card" href="{{ route('news.show', $article['slug']) }}">
-                <div class="news-photo" style="background-image:url('{{ asset('images/photos/'.$article['image']) }}')"></div>
+            <a class="news-card" href="{{ route('blog.show', $article['slug']) }}">
+                <div class="news-photo" style="background-image:url('{{ asset('images/photos/'.$article['image']) }}?v=5')"></div>
                 <p class="chip" style="margin-top:16px">{{ $article['date'] }}</p>
                 <h3>{{ $article['title'] }}</h3>
             </a>
@@ -239,7 +226,8 @@
 
 <section class="awards-block">
     <p class="kicker">Product range</p>
-    <h2>Anovator assessment systems</h2>
+    <h2>Smart Body Composition Analysis Systems</h2>
+    <p style="max-width:720px;margin:0 0 24px;color:#5b6168">Advanced assessment technology for professional use. Multi-category systems designed to support professional assessment, digital reporting, and smoother user experiences across different service environments.</p>
     <div class="awards-track" id="awards-track">
         @foreach($products as $product)
             <a class="award-card" href="{{ route('products.show', $product['slug']) }}">
@@ -255,27 +243,32 @@
 </section>
 
 <section class="certs-block">
-    <p class="kicker">Certified &amp; safe technology</p>
-    <h2 class="section-title">International certifications</h2>
-    <div class="certs-row">
-        <span class="cert-pill">Medical Device CTI Class II</span>
-        <span class="cert-pill">ISO 13485</span>
-        <span class="cert-pill">FDA</span>
-        <span class="cert-pill">CE</span>
-        <span class="cert-pill">RoHS</span>
-        <span class="cert-pill">3-year device warranty</span>
-        <span class="cert-pill">Lifetime software warranty</span>
+    <p class="kicker">Certified &amp; Safe Technology</p>
+    <h2 class="section-title">International Certifications. Clinically Trusted Accuracy. Local R&amp;D. Global Reach.</h2>
+    <div class="certs-row certs-logos">
+        <span class="cert-logo"><img src="{{ asset('images/certified/medical-device.png') }}?v=5" alt="Medical Device" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/cti.png') }}?v=5" alt="CTI" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/class-ii.png') }}?v=5" alt="Class II" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/iso-13485.png') }}?v=5" alt="ISO 13485" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/rohs.png') }}?v=5" alt="RoHS" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/fda.png') }}?v=5" alt="FDA" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/ce.png') }}?v=5" alt="CE" height="56" loading="lazy"></span>
+    </div>
+    <div class="certs-row" style="margin-top:12px">
+        <span class="cert-pill">3-Year Warranty</span>
+        <span class="cert-pill">Lifetime Warranty on Software &amp; Updates</span>
     </div>
 </section>
 
-<section class="cta-banner" style="background-image:url('{{ asset('images/photos/cta.jpg') }}')">
+<section class="cta-banner" style="background-image:url('{{ asset('images/photos/cta.jpg') }}?v=5')">
     <div>
         <p class="kicker">Anovator GCC</p>
-        <h2>Find the right assessment system for your facility</h2>
-        <p>Qatar · UAE · Saudi Arabia · Bahrain · Kuwait · Oman</p>
+        <h2>Find the Right Assessment System</h2>
+        <p>Contact our team to find the right solution for your facility. Qatar · UAE · Saudi Arabia · Bahrain · Kuwait · Oman</p>
         <div class="cta-row">
-            <a class="btn-solid" href="{{ route('contact') }}">Request a demo</a>
-            <a class="hero-cta" href="{{ route('finder') }}">Open product finder</a>
+            <a class="btn-solid" href="{{ route('contact') }}">Request a Demo</a>
+            <a class="hero-cta" href="tel:+97450664777">+974 5066 4777</a>
+            <a class="hero-cta" href="tel:+97472020005">+974 7202 0005</a>
         </div>
     </div>
 </section>

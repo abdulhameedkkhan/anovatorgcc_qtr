@@ -4,17 +4,17 @@
 @section('description', $article['excerpt'])
 
 @section('content')
-<section class="page-hero">
-    <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / <a href="{{ route('news.index') }}">News</a> / {{ $article['date'] }}</p>
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/'.$article['image']) }}')">
+    <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / <a href="{{ route('blog.index') }}">Blog</a> / {{ $article['date'] }}</p>
     <p class="kicker">{{ $article['date'] }}</p>
     <h1>{{ $article['title'] }}</h1>
 </section>
 
 <section class="page-wrap prose">
-    <div class="news-photo" style="min-height:380px;margin-bottom:28px;background-image:url('{{ asset('images/photos/'.$article['image']) }}')"></div>
+    <div class="news-photo" style="min-height:380px;margin-bottom:28px;background-image:url('{{ asset('images/photos/'.$article['image']) }}?v=7')"></div>
     <p>{{ $article['body'] }}</p>
     <div class="cta-row">
-        <a class="link-arrow" href="{{ route('news.index') }}">All news</a>
+        <a class="link-arrow" href="{{ route('blog.index') }}">All articles</a>
         <a class="link-arrow" href="{{ route('contact') }}">Contact Anovator GCC</a>
     </div>
 </section>

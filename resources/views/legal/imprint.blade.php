@@ -3,7 +3,7 @@
 @section('title', 'Imprint · Anovator GCC')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/hero-bg.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Imprint</p>
     <h1>Imprint</h1>
 </section>

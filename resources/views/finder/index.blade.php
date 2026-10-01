@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title', 'Product finder · Anovator GCC')
-@section('description', 'Find the right Anovator assessment system for your facility. Guaranteed guidance for A5, M3, M1, and M0.')
+@section('description', 'Find the right Anovator assessment system for your facility. Guaranteed guidance for A5, M3, M1, M0, P5, and M2 Pro.')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/mega-finder.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Product finder</p>
     <p class="kicker">Product finder</p>
-    <h1>Definitely the right product. Guaranteed!</h1>
-    <p>Answer three questions to identify the Anovator system that fits your facility type, assessment focus, and operating scale.</p>
+    <h1>Find the Right Assessment System</h1>
+    <p>Contact our team — or answer three questions — to identify the Anovator system that fits your facility type, assessment focus, and operating scale.</p>
 </section>
 
 <section class="page-wrap">
@@ -27,7 +27,7 @@
         <div>
             <h2>02 Assessment focus</h2>
             <div class="choice-group">
-                @foreach(['essential' => 'Essential body composition', 'progress' => 'Progress & posture tracking', 'full' => 'Full health assessment'] as $value => $label)
+                @foreach(['essential' => 'Essential body composition', 'progress' => 'Progress & posture tracking', 'visual' => '360° imaging & visual documentation', 'performance' => 'Sports performance testing', 'full' => 'Full health assessment'] as $value => $label)
                     <label class="choice {{ $focus === $value ? 'is-selected' : '' }}">
                         <input type="radio" name="focus" value="{{ $value }}" @checked($focus === $value) required style="display:none">
                         {{ $label }}

@@ -3,7 +3,7 @@
 @section('title', 'Search · Anovator GCC')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/hero-bg.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Search</p>
     <h1>Search</h1>
     <form action="{{ route('search') }}" method="get" class="search-form" style="margin-top:20px; max-width:640px">

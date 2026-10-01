@@ -4,7 +4,7 @@
 @section('description', 'Technical service, installation, training, and warranty support for Anovator systems across the GCC.')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/tile-service.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Support</p>
     <p class="kicker">Support</p>
     <h1>Advanced Solutions. Integrated Services.</h1>
@@ -41,13 +41,15 @@
 
     <h2>Certified & Safe Technology</h2>
     <p>International certifications. Clinically trusted accuracy. Local R&amp;D. Global reach.</p>
-    <ul class="plus-list">
-        <li>Medical Device CTI Class II</li>
-        <li>ISO 13485</li>
-        <li>RoHS</li>
-        <li>FDA</li>
-        <li>CE</li>
-    </ul>
+    <div class="certs-row certs-logos" style="margin:20px 0 28px">
+        <span class="cert-logo"><img src="{{ asset('images/certified/medical-device.png') }}?v=4" alt="Medical Device" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/cti.png') }}?v=4" alt="CTI" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/class-ii.png') }}?v=4" alt="Class II" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/iso-13485.png') }}?v=4" alt="ISO 13485" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/rohs.png') }}?v=4" alt="RoHS" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/fda.png') }}?v=4" alt="FDA" height="56" loading="lazy"></span>
+        <span class="cert-logo"><img src="{{ asset('images/certified/ce.png') }}?v=4" alt="CE" height="56" loading="lazy"></span>
+    </div>
 
     <div class="cta-row">
         <a class="link-arrow" href="{{ route('faq') }}">View all FAQs</a>

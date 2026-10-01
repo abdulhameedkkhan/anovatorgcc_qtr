@@ -6,14 +6,16 @@
 @section('content')
 @php
     $stagePhotos = [
-        'a5' => 'tile-clinic.jpg',
-        'm3' => 'tile-lab.jpg',
-        'm1' => 'hero-2.jpg',
-        'm0' => 'hero-3.jpg',
+        'a5' => 'products/a5/1.png',
+        'm3' => 'products/m3/1.png',
+        'm1' => 'products/m1/1.png',
+        'm0' => 'products/m0/1.png',
+        'p5' => 'products/p5/1.png',
+        'm2-pro' => 'products/m2-pro/1.png',
     ];
-    $stage = $stagePhotos[$product['slug']] ?? 'tile-clinic.jpg';
+    $stage = $stagePhotos[$product['slug']] ?? 'products/a5/1.png';
 @endphp
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/hero-bg.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / <a href="{{ route('products.index') }}">Products</a> / {{ $product['name'] }}</p>
     <p class="kicker">{{ $product['tag'] }}</p>
     <h1>{{ $product['name'] }}</h1>
@@ -22,8 +24,8 @@
 
 <section class="page-wrap">
     <div class="product-detail">
-        <div class="page-figure has-photo" style="background-image:url('{{ asset('images/photos/'.$stage) }}')">
-            @include('partials.device', ['model' => $product['slug']])
+        <div class="page-figure product-stage">
+            <img src="{{ asset('images/'.$stage) }}?v=4" alt="{{ $product['name'] }}" loading="lazy">
         </div>
         <div class="prose">
             <p>{{ $product['summary'] }}</p>

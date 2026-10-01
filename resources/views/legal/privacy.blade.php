@@ -3,7 +3,7 @@
 @section('title', 'Data protection · Anovator GCC')
 
 @section('content')
-<section class="page-hero">
+<section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/hero-bg.jpg') }}')">
     <p class="breadcrumb"><a href="{{ route('home') }}">Home</a> / Data protection</p>
     <h1>Data protection information</h1>
 </section>

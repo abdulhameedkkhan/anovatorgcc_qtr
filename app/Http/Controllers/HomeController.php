@@ -13,7 +13,7 @@ class HomeController extends Controller
             'products' => Catalog::products(),
             'stats' => Catalog::stats(),
             'news' => Catalog::news(),
-            'industries' => array_slice(Catalog::industries(), 0, 6),
+            'industries' => Catalog::industries(),
             'journey' => Catalog::journey(),
         ]);
     }
