@@ -7,6 +7,47 @@
         lang: document.getElementById("lang-overlay"),
     };
 
+    const hydrateLazyBackgrounds = (root = document) => {
+        root.querySelectorAll("[data-bg]").forEach((el) => {
+            if (el.dataset.bgLoaded === "1" || !el.dataset.bg) return;
+            el.style.backgroundImage = `url('${el.dataset.bg}')`;
+            el.dataset.bgLoaded = "1";
+        });
+    };
+
+    let translateReady = null;
+    const loadGoogleTranslate = () => {
+        if (translateReady) return translateReady;
+        translateReady = new Promise((resolve) => {
+            if (window.google?.translate?.TranslateElement) {
+                resolve();
+                return;
+            }
+            window.googleTranslateElementInit = () => {
+                new window.google.translate.TranslateElement(
+                    {
+                        pageLanguage: "en",
+                        includedLanguages: "en,ar",
+                        autoDisplay: false,
+                    },
+                    "google_translate_element",
+                );
+                resolve();
+            };
+            const script = document.createElement("script");
+            script.src =
+                "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+            script.async = true;
+            document.body.appendChild(script);
+        });
+        return translateReady;
+    };
+
+    const ensureArabicFont = () => {
+        const link = document.getElementById("font-cairo");
+        if (link && link.media !== "all") link.media = "all";
+    };
+
     const open = (name) => {
         if (name === "menu") {
             const willOpen = !nav?.classList.contains("is-open");
@@ -16,6 +57,7 @@
                 ?.querySelector(".menu-toggle")
                 ?.setAttribute("aria-expanded", willOpen ? "true" : "false");
             if (!willOpen) closeNavMenus();
+            if (willOpen) hydrateLazyBackgrounds(nav);
             return;
         }
         Object.entries(overlays).forEach(([key, el]) => {
@@ -27,6 +69,10 @@
                 () => document.getElementById("overlay-q")?.focus(),
                 40,
             );
+        }
+        if (name === "lang") {
+            ensureArabicFont();
+            loadGoogleTranslate();
         }
         document.body.style.overflow = "hidden";
     };
@@ -77,6 +123,9 @@
             "translated-rtl",
             ["ar", "ur", "fa"].includes(lang),
         );
+        if (["ar", "ur", "fa"].includes(lang)) {
+            ensureArabicFont();
+        }
 
         if (lang === "en") {
             clearCookie();
@@ -104,6 +153,10 @@
         "translated-rtl",
         ["ar", "ur", "fa"].includes(currentLang),
     );
+    if (["ar", "ur", "fa"].includes(currentLang)) {
+        ensureArabicFont();
+        loadGoogleTranslate();
+    }
     const langLabels = {
         en: "EN",
         ar: "AR",
@@ -145,6 +198,7 @@
             closeNavMenus();
             item.classList.add("is-open");
             setNavOpen(true);
+            hydrateLazyBackgrounds(item);
         });
         item.addEventListener("mouseleave", () => {
             if (isMobileNav()) return;
@@ -159,6 +213,7 @@
                 const opening = !item.classList.contains("is-open");
                 closeNavMenus();
                 item.classList.toggle("is-open", opening);
+                if (opening) hydrateLazyBackgrounds(item);
             },
         );
     });
@@ -330,10 +385,8 @@
         });
     }
 
-    /* ---------- Home page entrance animations ---------- */
-    const isHomePage = document.body.classList.contains("page-home");
-
-    if (isHomePage && "IntersectionObserver" in window) {
+    /* ---------- Site-wide entrance animations ---------- */
+    if ("IntersectionObserver" in window) {
         document.documentElement.classList.add("anim-on");
 
         const countUp = (el, delay) => {
@@ -403,6 +456,7 @@
         );
 
         const revealGroups = [
+            // Home
             [".stats-strip .stat-cell", 70],
             [".stats-trust", 0],
             [".journey > .kicker, .journey > h2, .journey > p", 80],
@@ -429,6 +483,25 @@
                 ".cta-banner .kicker, .cta-banner h2, .cta-banner > div > p, .cta-banner .cta-row",
                 90,
             ],
+            // Inner pages
+            [
+                ".page-hero .breadcrumb, .page-hero .kicker, .page-hero h1, .page-hero > p",
+                90,
+            ],
+            [".page-wrap > .kicker, .page-wrap > h2, .page-wrap > p", 80],
+            [".product-grid .product-card", 80],
+            [".product-detail > *", 120],
+            [".faq-group", 120],
+            [".faq-more", 80],
+            [".industry-grid .industry-card", 70],
+            [".news-grid .news-card", 90],
+            [".prose > *", 50],
+            [".contact-layout > *", 120],
+            [".finder-form, .finder-result, .choice-group", 90],
+            [".table-wrap", 80],
+            [".cta-row", 80],
+            [".search-result", 70],
+            [".faq-item", 45],
         ];
 
         revealGroups.forEach(([selector, stagger]) => {

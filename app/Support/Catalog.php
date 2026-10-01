@@ -2,23 +2,25 @@
 
 namespace App\Support;
 
+use App\Models\Article;
+use App\Models\Product;
+
 class Catalog
 {
     public static function products(): array
     {
-        return [
-            'a5' => self::a5(),
-            'm3' => self::m3(),
-            'm1' => self::m1(),
-            'm0' => self::m0(),
-            'p5' => self::p5(),
-            'm2-pro' => self::m2Pro(),
-        ];
+        return Product::query()
+            ->orderBy('sort_order')
+            ->get()
+            ->mapWithKeys(fn (Product $product) => [$product->slug => $product->toCatalogArray()])
+            ->all();
     }
 
     public static function product(string $slug): ?array
     {
-        return self::products()[$slug] ?? null;
+        $product = Product::query()->where('slug', $slug)->first();
+
+        return $product?->toCatalogArray();
     }
 
     public static function countries(): array
@@ -125,81 +127,124 @@ class Catalog
     {
         return [
             [
-                'q' => 'How does the Anovator system work?',
-                'a' => 'Anovator uses direct multi-frequency 8-electrode BIA enhanced by AI to deliver comprehensive body composition assessment in one safe, fast experience.',
+                'number' => '01',
+                'title' => 'System & User Experience',
+                'image' => 'faq/faq-technology.jpg',
+                'items' => [
+                    [
+                        'n' => '01',
+                        'q' => 'How does Anovator work?',
+                        'a' => 'Anovator uses multi-frequency 8-electrode BIA, supported by AI-powered assessment technology, to deliver fast and advanced body composition analysis.',
+                    ],
+                    [
+                        'n' => '02',
+                        'q' => 'What makes Anovator different from conventional body analysis systems?',
+                        'a' => 'Anovator combines body composition analysis and measurement, posture assessment, body dimensions and circumferences, vision screening, selected basic health indicators, and digital reporting in one platform.',
+                    ],
+                    [
+                        'n' => '03',
+                        'q' => 'Are the reports easy to understand?',
+                        'a' => 'Yes. Anovator reports are designed to be visual, clear, and easy to read.',
+                    ],
+                    [
+                        'n' => '04',
+                        'q' => 'Is the app free for users?',
+                        'a' => 'Yes. Anovator provides a free app that allows users to access and review their reports via mobile, tablet, or desktop.',
+                    ],
+                    [
+                        'n' => '05',
+                        'q' => 'Does Anovator support the Arabic language?',
+                        'a' => 'Yes. Anovator supports the Arabic language across the user interface and reports, with bilingual support available in Arabic and English.',
+                    ],
+                    [
+                        'n' => '06',
+                        'q' => 'How long does installation and training take?',
+                        'a' => 'Installation and staff training are typically completed within half a working day, supporting a quick transition into daily operation.',
+                    ],
+                ],
             ],
             [
-                'q' => 'What sets Anovator apart from conventional body analyzers?',
-                'a' => 'Anovator combines body analysis, posture evaluation, dimension measurement, and digital reporting in one comprehensive, easy-to-follow platform.',
+                'number' => '02',
+                'title' => 'Support, Connectivity & System Selection',
+                'image' => 'faq/faq-support.jpg',
+                'items' => [
+                    [
+                        'n' => '07',
+                        'q' => 'What technical support is available?',
+                        'a' => 'Anovator GCC provides 24/7 technical support across the GCC.',
+                    ],
+                    [
+                        'n' => '08',
+                        'q' => 'Can reports be accessed from multiple devices?',
+                        'a' => 'Yes. Reports can be accessed from the system, mobile, tablet, or desktop for easier review and follow-up.',
+                    ],
+                    [
+                        'n' => '09',
+                        'q' => 'Does Anovator support connectivity and digital workflow?',
+                        'a' => 'Yes. Anovator supports an organized digital environment with connectivity options that help facilities manage assessments, reports, and result follow-up more efficiently.',
+                    ],
+                    [
+                        'n' => '10',
+                        'q' => 'Is a demo available before purchase?',
+                        'a' => 'Yes. You can request a tailored demo to experience the system and identify the most suitable model for your facility.',
+                    ],
+                    [
+                        'n' => '11',
+                        'q' => 'Can Anovator GCC help identify the right model?',
+                        'a' => 'Yes. Our team helps identify the most suitable model based on your facility type, service model, and operational needs.',
+                    ],
+                ],
             ],
             [
-                'q' => 'Are the reports clear and easy to understand?',
-                'a' => 'Yes. Anovator reports are structured and clear, helping professionals explain results, support follow-up, and make better-informed decisions.',
-            ],
-            [
-                'q' => 'Is the app free for users?',
-                'a' => 'Yes. The Anovator app is free for all users to access reports and track progress on mobile, tablet, and desktop.',
-            ],
-            [
-                'q' => 'Does Anovator support Arabic?',
-                'a' => 'Yes. Anovator supports Arabic across the user experience and reports, and the support team is fluent in both Arabic and English.',
-            ],
-            [
-                'q' => 'How long do installation and training take?',
-                'a' => 'Installation takes half a working day, with full team training completed the same day.',
-            ],
-            [
-                'q' => 'What technical support is available?',
-                'a' => 'Anovator GCC provides 24/7 technical support across Qatar, the UAE, Saudi Arabia, Bahrain, Kuwait, and Oman.',
-            ],
-            [
-                'q' => 'Can reports be accessed from multiple devices?',
-                'a' => 'Yes. Reports can be accessed from the system, mobile, tablet, or desktop for easier review and follow-up.',
-            ],
-            [
-                'q' => 'Is the assessment safe and non-invasive?',
-                'a' => 'Yes. The assessment is fast, safe, comfortable, and non-invasive, and is suitable for professional settings and users aged 3 to 99.',
-            ],
-            [
-                'q' => 'Is a demo available before purchase?',
-                'a' => 'Yes. You can request a tailored demo to experience the system and identify the most suitable model for your facility.',
-            ],
-            [
-                'q' => 'What payment options are available?',
-                'a' => 'Flexible payment arrangements can be discussed. Contact Anovator GCC to review the available options.',
-            ],
-            [
-                'q' => 'Are Anovator systems supported by international certifications?',
-                'a' => 'Yes. Anovator systems are supported by international certifications and compliance documentation related to quality, safety, accuracy, and performance, including Medical Device CTI Class II, ISO 13485, RoHS, FDA, and CE.',
+                'number' => '03',
+                'title' => 'Purchase, Safety & Follow-Up',
+                'image' => 'faq/faq-safety.jpg',
+                'items' => [
+                    [
+                        'n' => '12',
+                        'q' => 'What payment options are available?',
+                        'a' => 'Flexible payment arrangements can be discussed. Contact Anovator GCC to review the available options.',
+                    ],
+                    [
+                        'n' => '13',
+                        'q' => 'Are Anovator systems supported by international certifications and compliance documentation?',
+                        'a' => 'Yes. Anovator systems are supported by international certifications and compliance documentation related to quality, safety, accuracy, and performance.',
+                    ],
+                    [
+                        'n' => '14',
+                        'q' => 'Is the assessment safe and non-invasive?',
+                        'a' => 'Yes. The assessment is fast, safe, comfortable, and non-invasive, making it suitable for professional settings and users aged 3 and above.',
+                    ],
+                    [
+                        'n' => '15',
+                        'q' => 'Can Anovator be used across multiple sectors?',
+                        'a' => 'Yes. Anovator serves multiple sectors, including healthcare, nutrition, wellness, sports, rehabilitation, aesthetics, pharmacies, education, employee health and wellbeing programs, and home health monitoring.',
+                    ],
+                    [
+                        'n' => '16',
+                        'q' => 'Do Anovator reports support long-term follow-up?',
+                        'a' => 'Yes. Stored digital reports allow results to be compared over time, helping users and professionals track progress and support ongoing follow-up.',
+                    ],
+                ],
             ],
         ];
     }
 
     public static function news(): array
     {
-        return [
-            'gcc-assessment-standard' => [
-                'slug' => 'gcc-assessment-standard',
-                'date' => 'August 2026',
-                'title' => 'Anovator GCC expands regional support for professional body composition assessment',
-                'excerpt' => 'Clinics, wellness centers, and sports facilities across the Gulf now have closer access to installation, training, and 24/7 technical support.',
-                'image' => 'news-1.jpg',
-                'body' => 'Anovator GCC continues to expand its regional framework for implementation and after-sales support. Facilities adopting 8-electrode BIA systems receive installation, same-day team training, and ongoing software updates covered by a lifetime software warranty. The goal is consistent measurement quality across healthcare, nutrition, sports, and wellness environments in Qatar, the UAE, Saudi Arabia, Bahrain, Kuwait, and Oman.',
-            ],
-            'a5-all-in-one' => [
-                'slug' => 'a5-all-in-one',
-                'date' => 'June 2026',
-                'title' => 'Anovator A5: an all-in-one platform for advanced health assessment',
-                'excerpt' => 'The flagship system combines body composition analysis, posture assessment, selected vital indicators, and digital reporting in one workflow.',
-                'image' => 'news-2.jpg',
-                'body' => 'Anovator A5 is designed for facilities that need more than a conventional body analyzer. The platform brings 8-electrode BIA, 3D visual scanning, posture and balance assessment, and selected health indicators into a single assessment journey. Results are delivered in about 30 seconds, with QR access through the free Anovator app for follow-up on mobile, tablet, and desktop.',
-            ],
-        ];
+        return Article::query()
+            ->orderBy('sort_order')
+            ->orderByDesc('published_at')
+            ->get()
+            ->mapWithKeys(fn (Article $article) => [$article->slug => $article->toCatalogArray()])
+            ->all();
     }
 
     public static function article(string $slug): ?array
     {
-        return self::news()[$slug] ?? null;
+        $article = Article::query()->where('slug', $slug)->first();
+
+        return $article?->toCatalogArray();
     }
 
     public static function journey(): array
@@ -302,219 +347,5 @@ class Catalog
         }
 
         return $hits;
-    }
-
-    private static function a5(): array
-    {
-        return [
-            'slug' => 'a5',
-            'code' => 'A5',
-            'name' => 'Anovator A5',
-            'tag' => 'Intelligent & Visionary',
-            'headline' => 'A leading all-in-one platform for advanced health assessment',
-            'summary' => 'Meet the next generation of body analysis systems. Faster results, clearer insight, smarter assessment — body composition, posture, selected vital indicators, and digital follow-up in one platform.',
-            'ideal' => 'Full health analysis',
-            'display' => '32" IPS HD (1920 × 1080)',
-            'method' => '8-point BIA',
-            'frequencies' => '20 / 100 kHz',
-            'weight' => '67 kg',
-            'range' => '0–200 kg',
-            'extra' => 'Blood pressure, SpO₂, spirometry, ultrasonic height',
-            'features' => [
-                'Comprehensive Assessment',
-                'Multi-Function System',
-                'Advanced Technology',
-                'Greater Flexibility',
-            ],
-            'specs' => [
-                'Display' => '32" IPS HD touch (1920 × 1080)',
-                'Measurement method' => '8-electrode multi-frequency BIA',
-                'Frequencies' => '20 / 100 kHz',
-                'Weight' => '67 kg',
-                'Measuring range' => '0–200 kg',
-                'Age range' => '3–99 years',
-                'Additional measurements' => 'Blood pressure, SpO₂, spirometry, ultrasonic height',
-                'Reporting' => 'On-screen, print, QR, free mobile app',
-            ],
-        ];
-    }
-
-    private static function m3(): array
-    {
-        return [
-            'slug' => 'm3',
-            'code' => 'M3',
-            'name' => 'Anovator M3',
-            'tag' => 'Professional & Connected',
-            'headline' => 'Professional system for assessment, consultation, and follow-up',
-            'summary' => 'A balanced solution for facilities that want to extend assessment beyond body composition analysis, with connectivity for consultation and regular follow-up.',
-            'ideal' => 'Professional follow-up',
-            'display' => '32" IPS HD (1920 × 1080)',
-            'method' => '8-point BIA',
-            'frequencies' => '20 / 100 kHz',
-            'weight' => '50 kg',
-            'range' => '0–200 kg',
-            'extra' => 'Blood pressure + SpO₂',
-            'features' => [
-                'Beyond Body Composition',
-                'Consultation Support',
-                'Professional System',
-                'Regular Follow-Up',
-            ],
-            'specs' => [
-                'Display' => '32" IPS HD touch (1920 × 1080)',
-                'Measurement method' => '8-electrode multi-frequency BIA',
-                'Frequencies' => '20 / 100 kHz',
-                'Weight' => '50 kg',
-                'Measuring range' => '0–200 kg',
-                'Age range' => '3–99 years',
-                'Additional measurements' => 'Blood pressure + SpO₂',
-                'Reporting' => 'Phone / paper print / web',
-            ],
-        ];
-    }
-
-    private static function m1(): array
-    {
-        return [
-            'slug' => 'm1',
-            'code' => 'M1',
-            'name' => 'Anovator M1',
-            'tag' => 'Compact & Practical',
-            'headline' => 'Purpose-built assessment and progress tracking',
-            'summary' => 'Combines body composition analysis, external measurements, and posture assessment, with visit-to-visit comparison for ongoing progress monitoring.',
-            'ideal' => 'Fitness & wellness',
-            'display' => '10.1" IPS (1920 × 1200)',
-            'method' => '8-point BIA',
-            'frequencies' => '50 / 250 kHz',
-            'weight' => '8 kg',
-            'range' => '5–300 kg',
-            'extra' => 'Posture assessment',
-            'features' => [
-                'Body Composition Analysis',
-                'External Measurements',
-                'Posture Assessment',
-                'Track Changes & Compare Progress',
-            ],
-            'specs' => [
-                'Display' => '10.1" IPS (1920 × 1200)',
-                'Measurement method' => '8-electrode multi-frequency BIA',
-                'Frequencies' => '50 / 250 kHz',
-                'Weight' => '8 kg',
-                'Measuring range' => '5–300 kg',
-                'Age range' => '3–99 years',
-                'Additional measurements' => 'AI-supported posture assessment',
-                'Reporting' => 'On-screen, printable, cloud history',
-            ],
-        ];
-    }
-
-    private static function m0(): array
-    {
-        return [
-            'slug' => 'm0',
-            'code' => 'M0',
-            'name' => 'Anovator M0',
-            'tag' => 'Smart & Compact',
-            'headline' => 'Essential body composition analysis for everyday use',
-            'summary' => 'A practical, space-saving system for facilities focused on essential body composition analysis in daily professional workflows.',
-            'ideal' => 'Entry level',
-            'display' => '10.1" IPS HD',
-            'method' => '8-point BIA',
-            'frequencies' => '20 / 100 kHz',
-            'weight' => '45 kg',
-            'range' => '0–200 kg',
-            'extra' => '—',
-            'features' => [
-                'Essential Body Composition Analysis',
-                'Compact Design',
-                'Space-Saving System',
-                'Everyday Use',
-            ],
-            'specs' => [
-                'Display' => '10.1" IPS HD touch',
-                'Measurement method' => '8-electrode multi-frequency BIA',
-                'Frequencies' => '20 / 100 kHz',
-                'Weight' => '45 kg',
-                'Measuring range' => '0–200 kg',
-                'Age range' => '3–99 years',
-                'Additional measurements' => 'Core body composition metrics',
-                'Reporting' => 'Phone / paper print / web',
-            ],
-        ];
-    }
-
-    private static function p5(): array
-    {
-        return [
-            'slug' => 'p5',
-            'code' => 'P5',
-            'name' => 'Anovator P5',
-            'tag' => 'Athletic & Dynamic',
-            'headline' => 'Advanced sports performance assessment',
-            'summary' => 'Anovator P5 is designed for facilities that want to go beyond standard body composition assessment and integrate performance testing into a single, advanced workflow. It supports smarter training decisions, broader physical assessments, and structured performance follow-up over time.',
-            'ideal' => 'Sports performance',
-            'display' => '27" 4K (4096 × 2160)',
-            'method' => '8-point BIA + AI vision',
-            'frequencies' => '20 / 100 / 250 kHz',
-            'weight' => '—',
-            'range' => '10–250 kg',
-            'extra' => 'Grip strength, power tests, exercise safety',
-            'features' => [
-                'Sports Performance Assessment',
-                'Physical Performance Testing',
-                'Training Decision Support',
-                'Performance Follow-Up',
-            ],
-            'specs' => [
-                'Display' => '27" 4K touch (4096 × 2160)',
-                'Measurement method' => '8-electrode multi-frequency BIA + 20MP AI vision',
-                'Frequencies' => '20 / 100 / 250 kHz',
-                'Measuring range' => '10–250 kg',
-                'AI vision system' => '20MP camera, skeletal tracking, body segmentation',
-                'Assessment functions' => 'Body composition, posture, grip strength, upper-body strength, lower-body power, vital capacity, exercise safety, balance, agile response',
-                'Device dimensions' => '870 × 550 × 1800 mm',
-                'External interface' => 'USB Host ×2, LAN ×1',
-                'Power consumption' => '60 W',
-                'Working distance' => '1 m',
-                'Reporting' => 'Digital & printed reports',
-            ],
-        ];
-    }
-
-    private static function m2Pro(): array
-    {
-        return [
-            'slug' => 'm2-pro',
-            'code' => 'M2 Pro',
-            'name' => 'Anovator M2 Pro',
-            'tag' => 'Visual & Measurable',
-            'headline' => '360° 3D imaging for body changes',
-            'summary' => 'Anovator M2 Pro is designed for facilities that want to document external body changes through 360° 3D imaging and precise measurements. It provides clear visual documentation that supports consultations and makes physical changes easier to present and explain.',
-            'ideal' => 'Visual documentation',
-            'display' => '21.5" IPS HD (1920 × 1080)',
-            'method' => 'DSM-BIA + AI 3D vision',
-            'frequencies' => '20 / 100 / 250 kHz',
-            'weight' => '—',
-            'range' => '—',
-            'extra' => '360° 3D imaging, posture, shoulder mobility',
-            'features' => [
-                '360° 3D Body Imaging',
-                'Precise Body Measurements',
-                'Visual Documentation',
-                'Clearer Presentation of Changes',
-            ],
-            'specs' => [
-                'Display' => '21.5" IPS HD touch (1920 × 1080)',
-                'Measurement method' => 'Direct segmental multi-frequency BIA (DSM-BIA)',
-                'Frequencies' => '20 / 100 / 250 kHz',
-                '3D imaging' => 'AI binocular 3D visual recognition, 360° body imaging',
-                'Assessment functions' => 'Body composition, body dimensions, posture, 360° 3D imaging, shoulder mobility, weight',
-                'Device dimensions' => '447 × 346 × 1634 mm',
-                'Electric current' => '< 280 µA',
-                'Operating system' => 'Android',
-                'Reporting' => 'Digital & printed reports',
-            ],
-        ];
     }
 }

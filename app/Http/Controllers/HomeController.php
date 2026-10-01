@@ -12,7 +12,7 @@ class HomeController extends Controller
         return view('home', [
             'products' => Catalog::products(),
             'stats' => Catalog::stats(),
-            'news' => Catalog::news(),
+            'news' => array_slice(Catalog::news(), 0, 4),
             'industries' => Catalog::industries(),
             'journey' => Catalog::journey(),
         ]);

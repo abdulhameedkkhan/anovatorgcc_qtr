@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\InquiryController as AdminInquiryController;
+use App\Http\Controllers\Admin\PasswordController as AdminPasswordController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FinderController;
 use App\Http\Controllers\HomeController;
@@ -42,3 +48,23 @@ Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsle
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/imprint', [PageController::class, 'imprint'])->name('imprint');
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'showLogin'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('login.submit');
+
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('products', AdminProductController::class)->except(['show']);
+        Route::resource('articles', AdminArticleController::class)->except(['show']);
+
+        Route::get('inquiries', [AdminInquiryController::class, 'index'])->name('inquiries.index');
+        Route::get('inquiries/{inquiry}', [AdminInquiryController::class, 'show'])->name('inquiries.show');
+        Route::delete('inquiries/{inquiry}', [AdminInquiryController::class, 'destroy'])->name('inquiries.destroy');
+
+        Route::get('password', [AdminPasswordController::class, 'edit'])->name('password.edit');
+        Route::put('password', [AdminPasswordController::class, 'update'])->name('password.update');
+    });
+});

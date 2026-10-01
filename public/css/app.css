@@ -14,8 +14,9 @@
     --radius: 12px;
     --radius-sm: 8px;
     --shadow: 0 2px 20px rgba(0, 0, 0, 0.07);
-    --font: "DM Sans", Inter, sans-serif;
-    --display: "DM Sans", Inter, sans-serif;
+    --font: "Poppins", sans-serif;
+    --display: "Poppins", sans-serif;
+    --font-ar: "Cairo", sans-serif;
 }
 
 *,
@@ -27,6 +28,7 @@ html,
 body {
     margin: 0;
     padding: 0;
+    overflow-x: clip;
 }
 html {
     scroll-behavior: smooth;
@@ -38,10 +40,14 @@ body {
     line-height: 1.55;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 img,
-svg {
+svg,
+video,
+iframe {
     max-width: 100%;
+    height: auto;
     display: block;
 }
 a {
@@ -862,6 +868,47 @@ body.is-nav-open .nav-dim {
     font-size: 12px;
     font-weight: 500;
 }
+.stats-trust {
+    text-align: center;
+    padding: 8px 20px 28px;
+    color: #5b6168;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.section-lead {
+    max-width: 720px;
+    margin: 0 0 24px;
+    color: #5b6168;
+    font-weight: 500;
+}
+.section-lead-center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 28px;
+    text-align: center;
+}
+.section-note {
+    max-width: 720px;
+    margin: 28px 0 0;
+    color: #5b6168;
+    font-weight: 500;
+}
+.section-note-center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.chip-spaced {
+    margin-top: 16px;
+}
+.certs-row-pills {
+    margin-top: 12px;
+}
+.awards-block .cta-row,
+.news-block .cta-row {
+    margin-top: 24px;
+}
 
 .newsletter-block {
     display: grid;
@@ -1346,8 +1393,15 @@ body {
 .goog-te-gadget {
     font-size: 0 !important;
 }
-html.translated-rtl body {
+html[lang="ar"],
+html.translated-rtl {
+    --font: var(--font-ar);
+    --display: var(--font-ar);
+}
+html.translated-rtl body,
+html[lang="ar"] body {
     direction: rtl;
+    font-family: var(--font-ar);
 }
 
 .page-hero {
@@ -1490,6 +1544,7 @@ html.translated-rtl body {
 }
 .spec-table {
     width: 100%;
+    min-width: 720px;
     border-collapse: collapse;
     margin-top: 24px;
 }
@@ -1512,6 +1567,10 @@ html.translated-rtl body {
     margin: 40px 0 12px;
     letter-spacing: -0.04em;
 }
+.prose h3 {
+    font-size: 22px;
+    margin: 28px 0 10px;
+}
 .prose p,
 .prose li {
     font-size: 16px;
@@ -1520,6 +1579,16 @@ html.translated-rtl body {
 }
 .prose p + p {
     margin-top: 12px;
+}
+.prose ul,
+.prose ol {
+    margin: 12px 0 12px 1.2em;
+}
+.news-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
 }
 .split-2 {
     display: grid;
@@ -1569,37 +1638,131 @@ html.translated-rtl body {
     color: var(--muted);
     font-weight: 500;
 }
+.faq-groups-section {
+    display: grid;
+    gap: 48px;
+}
+.faq-group {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 28px;
+    align-items: start;
+}
+.faq-group.is-reversed {
+    grid-template-columns: 0.85fr 1.15fr;
+}
+.faq-group.is-reversed .faq-group-questions {
+    order: 2;
+}
+.faq-group.is-reversed .faq-group-media {
+    order: 1;
+}
+.faq-group-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.faq-group-number {
+    color: var(--red);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+.faq-group-head h2 {
+    margin: 0;
+    font-size: clamp(24px, 3vw, 34px);
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+}
+.faq-group-items {
+    display: grid;
+    gap: 10px;
+}
 .faq-item {
     background: var(--white);
     border-radius: 12px;
-    margin-bottom: 10px;
-    padding: 0 20px;
+    margin-bottom: 0;
+    padding: 0 18px;
+    border: 1px solid var(--line);
 }
 .faq-item button {
     width: 100%;
     text-align: left;
-    padding: 18px 0;
-    font-size: 17px;
-    font-weight: 700;
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 600;
     display: flex;
     justify-content: space-between;
     gap: 16px;
+    align-items: flex-start;
+}
+.faq-q-body {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+.faq-num {
+    color: var(--red);
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 22px;
+    padding-top: 2px;
 }
 .faq-item button::after {
     content: "+";
     color: var(--red);
+    flex-shrink: 0;
 }
 .faq-item.is-open button::after {
     content: "–";
 }
 .faq-item .faq-a {
     display: none;
-    padding: 0 8px 18px 0;
+    padding: 0 0 18px 34px;
     color: var(--muted);
     font-weight: 500;
 }
 .faq-item.is-open .faq-a {
     display: block;
+}
+.faq-group-media {
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+}
+.faq-group-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    background: #eceae6;
+}
+.faq-group-media-label {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.faq-more {
+    margin-top: 20px;
+    padding: 36px 28px;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+}
+.faq-more h2 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 3vw, 36px);
+    letter-spacing: -0.04em;
+}
+.faq-more p {
+    margin: 0 0 18px;
+    max-width: 640px;
+    color: var(--muted);
+    font-weight: 500;
 }
 .cta-row {
     display: flex;
@@ -1609,9 +1772,16 @@ html.translated-rtl body {
     align-items: center;
 }
 .link-arrow {
+    display: inline-flex;
+    align-items: center;
     font-weight: 700;
     font-size: 14px;
     color: var(--ink);
+}
+.link-arrow::after {
+    content: "→";
+    margin-left: 8px;
+    transition: transform 0.3s ease;
 }
 .link-arrow:hover {
     color: var(--red);
@@ -1689,6 +1859,8 @@ html.translated-rtl body {
 }
 .table-wrap {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     background: var(--white);
     border-radius: 12px;
     padding: 8px 20px;
@@ -2242,8 +2414,16 @@ html.translated-rtl body {
     .stats-strip,
     .journey-grid,
     .industry-preview-grid,
-    .app-split {
+    .app-split,
+    .faq-group {
         grid-template-columns: 1fr;
+    }
+    .faq-group.is-reversed .faq-group-questions,
+    .faq-group.is-reversed .faq-group-media {
+        order: initial;
+    }
+    .faq-group-media {
+        position: static;
     }
     .bento .tile-featured {
         grid-column: auto;
@@ -2286,33 +2466,88 @@ html.translated-rtl body {
     .country-list {
         columns: 1;
     }
+    .page-hero {
+        padding: 40px 18px 32px;
+    }
+    .page-hero h1 {
+        font-size: clamp(28px, 8vw, 40px);
+    }
+    .page-wrap {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .product-detail,
+    .faq-group {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .product-detail .page-figure {
+        min-height: 320px;
+    }
+    .brand-claim {
+        display: none;
+    }
+    .news-photo {
+        min-height: 180px !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-shell {
+        --hero-h: 360px;
+    }
+    .hero-copy-inner {
+        padding: 20px 16px 28px;
+    }
+    .hero-copy h2 {
+        font-size: 24px;
+    }
+    .hero-lead {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .stats-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .awards-track {
+        gap: 12px;
+    }
+    .award-card {
+        min-width: 78vw;
+    }
+    .cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .faq-item button {
+        font-size: 15px;
+    }
+    .faq-item .faq-a {
+        padding-left: 0;
+    }
+}
+
+/* Faster paint for below-the-fold blocks */
+.news-block,
+.awards-block,
+.newsletter-block,
+.faq-groups-section,
+.page-wrap .product-grid,
+.cert-row {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 640px;
 }
 
 /* ============================================================
-   Home page animations
-   Additive only — existing theme, colours and layout untouched.
+   Site-wide entrance animations
    Motion is opt-in via html.anim-on (set by app.js).
-   - no-preference users get the full entrance choreography.
-   - reduced-motion users still get gentle opacity fades (no movement).
    ============================================================ */
 
-/* Static helper — the arrow is part of the design, only the slide
-   motion is gated below. */
-.page-home .link-arrow {
-    display: inline-flex;
-    align-items: center;
-}
-.page-home .link-arrow::after {
-    content: "→";
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-    /* Scroll-reveal system: app.js adds .reveal, then .is-in once the
-       element enters the viewport, and removes both again after the
-       entrance finishes so hover styles stay untouched. */
-    .anim-on .page-home .reveal {
+    .anim-on .reveal {
         opacity: 0;
         transform: translate3d(0, 28px, 0);
         transition:
@@ -2321,12 +2556,11 @@ html.translated-rtl body {
         transition-delay: var(--reveal-delay, 0s);
         will-change: opacity, transform;
     }
-    .anim-on .page-home .reveal.is-in {
+    .anim-on .reveal.is-in {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }
 
-    /* Hero slide copy — staggered entrance on every slide change */
     .page-home .hero-slide.is-active .hero-kicker {
         animation: hero-copy-in 0.55s 0.05s cubic-bezier(0.22, 0.61, 0.36, 1)
             both;
@@ -2376,36 +2610,43 @@ html.translated-rtl body {
         }
     }
 
-    /* Stats strip — count-up digits plus a soft hover lift */
-    .page-home .stat-cell,
-    .page-home .journey-step,
-    .page-home .btn-solid {
+    .stat-cell,
+    .journey-step,
+    .btn-solid,
+    .product-card,
+    .industry-card,
+    .news-card,
+    .faq-item {
         transition:
             transform 0.3s ease,
             box-shadow 0.3s ease;
     }
-    .page-home .stat-cell:hover {
+    .stat-cell:hover,
+    .product-card:hover,
+    .industry-card:hover,
+    .news-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 14px 30px rgba(11, 13, 18, 0.08);
     }
-
-    /* Journey steps */
-    .page-home .journey-step:hover {
+    .journey-step:hover {
         transform: translateY(-6px);
         box-shadow: 0 16px 32px rgba(11, 13, 18, 0.08);
     }
 
-    /* Product cards — gentle levitation for the device renders */
-    .page-home .award-visual .device {
+    .award-visual .device,
+    .product-visual .device {
         animation: device-float 7s ease-in-out infinite;
     }
-    .page-home .award-card:nth-child(2) .award-visual .device {
+    .award-card:nth-child(2) .award-visual .device,
+    .product-card:nth-child(2) .product-visual .device {
         animation-delay: -1.8s;
     }
-    .page-home .award-card:nth-child(3) .award-visual .device {
+    .award-card:nth-child(3) .award-visual .device,
+    .product-card:nth-child(3) .product-visual .device {
         animation-delay: -3.5s;
     }
-    .page-home .award-card:nth-child(4) .award-visual .device {
+    .award-card:nth-child(4) .award-visual .device,
+    .product-card:nth-child(4) .product-visual .device {
         animation-delay: -5.2s;
     }
     @keyframes device-float {
@@ -2418,30 +2659,23 @@ html.translated-rtl body {
         }
     }
 
-    /* Blog cards — soft image zoom on hover */
-    .page-home .news-photo {
+    .news-photo {
         transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
-    .page-home .news-card:hover .news-photo {
+    .news-card:hover .news-photo {
         transform: scale(1.04);
     }
 
-    /* Certifications — tile lift is handled by the base .cert-logo
-       styles, so reduced-motion users keep the same hover behaviour. */
-
-    /* Text arrows slide on hover */
-    .page-home .link-arrow:hover::after {
+    .link-arrow:hover::after {
         transform: translateX(5px);
     }
 
-    /* Solid buttons */
-    .page-home .btn-solid:hover {
+    .btn-solid:hover {
         transform: translateY(-2px);
         box-shadow: 0 12px 26px rgba(239, 10, 106, 0.3);
     }
 
-    /* CTA banner — slow background drift */
-    .page-home .cta-banner {
+    .cta-banner {
         animation: cta-drift 26s ease-in-out infinite alternate;
     }
     @keyframes cta-drift {
@@ -2453,23 +2687,35 @@ html.translated-rtl body {
         }
     }
 
+    .page-hero.has-photo {
+        animation: hero-fade-in 0.8s ease both;
+    }
+    @keyframes hero-fade-in {
+        from {
+            opacity: 0.72;
+            background-position: center 42%;
+        }
+        to {
+            opacity: 1;
+            background-position: center center;
+        }
+    }
+
     @media (max-width: 767px) {
-        .anim-on .page-home .reveal {
+        .anim-on .reveal {
             transform: translate3d(0, 18px, 0);
         }
     }
 }
 
-/* Reduced motion: keep gentle opacity fades, drop every movement
-   and looping animation. */
 @media (prefers-reduced-motion: reduce) {
-    .anim-on .page-home .reveal {
+    .anim-on .reveal {
         opacity: 0;
         transform: none;
         transition: opacity 0.6s ease;
         transition-delay: var(--reveal-delay, 0s);
     }
-    .anim-on .page-home .reveal.is-in {
+    .anim-on .reveal.is-in {
         opacity: 1;
     }
     .page-home .hero-slide.is-active .hero-kicker,
@@ -2477,8 +2723,10 @@ html.translated-rtl body {
     .page-home .hero-slide.is-active .hero-copy h2,
     .page-home .hero-slide.is-active .hero-lead,
     .page-home .hero-slide.is-active .hero-cta-link,
-    .page-home .award-visual .device,
-    .page-home .cta-banner {
+    .award-visual .device,
+    .product-visual .device,
+    .cta-banner,
+    .page-hero.has-photo {
         animation: none;
     }
 }

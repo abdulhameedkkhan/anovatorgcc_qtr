@@ -22,12 +22,17 @@
                 <a class="nav-label {{ request()->routeIs('products.*') || request()->routeIs('finder') ? 'is-active' : '' }}" href="{{ route('products.index') }}">Products</a>
                 <div class="mega mega-cards">
                     <a class="mega-card" href="{{ route('products.index') }}">
-                        <span class="mega-card-img" style="background-image:url('{{ asset('images/photos/mega-products.jpg') }}?v=7')"></span>
+                        <span class="mega-card-img" data-bg="{{ asset('images/photos/mega-products.jpg') }}?v=7"></span>
                         <span class="mega-card-title">All products</span>
                     </a>
                     @foreach($navProducts as $product)
+                        @php
+                            $navImg = file_exists(public_path('images/products/'.$product['slug'].'/1.jpg'))
+                                ? 'images/products/'.$product['slug'].'/1.jpg'
+                                : 'images/products/'.$product['slug'].'/1.png';
+                        @endphp
                         <a class="mega-card" href="{{ route('products.show', $product['slug']) }}">
-                            <span class="mega-card-img mega-card-img-product" style="background-image:url('{{ asset('images/products/'.$product['slug'].'/1.png') }}?v=7')"></span>
+                            <span class="mega-card-img mega-card-img-product" data-bg="{{ asset($navImg) }}?v=10"></span>
                             <span class="mega-card-title">{{ $product['name'] }}</span>
                         </a>
                     @endforeach

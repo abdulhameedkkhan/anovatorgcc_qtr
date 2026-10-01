@@ -1,0 +1,215 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Product;
+use Illuminate\Database\Seeder;
+
+class ProductSeeder extends Seeder
+{
+    public function run(): void
+    {
+        foreach ($this->products() as $index => $product) {
+            Product::query()->updateOrCreate(
+                ['slug' => $product['slug']],
+                array_merge($product, ['sort_order' => $index + 1])
+            );
+        }
+    }
+
+    private function products(): array
+    {
+        return [
+            [
+                'slug' => 'a5',
+                'code' => 'A5',
+                'name' => 'Anovator A5',
+                'tag' => 'Intelligent & Visionary',
+                'headline' => 'A leading all-in-one platform for advanced health assessment',
+                'summary' => 'Meet the next generation of body analysis systems. Faster results, clearer insight, smarter assessment — body composition, posture, selected vital indicators, and digital follow-up in one platform.',
+                'ideal' => 'Full health analysis',
+                'display' => '32" IPS HD (1920 × 1080)',
+                'method' => '8-point BIA',
+                'frequencies' => '20 / 100 kHz',
+                'weight' => '67 kg',
+                'range' => '0–200 kg',
+                'extra' => 'Blood pressure, SpO₂, spirometry, ultrasonic height',
+                'features' => [
+                    'Comprehensive Assessment',
+                    'Multi-Function System',
+                    'Advanced Technology',
+                    'Greater Flexibility',
+                ],
+                'specs' => [
+                    'Display' => '32" IPS HD touch (1920 × 1080)',
+                    'Measurement method' => '8-electrode multi-frequency BIA',
+                    'Frequencies' => '20 / 100 kHz',
+                    'Weight' => '67 kg',
+                    'Measuring range' => '0–200 kg',
+                    'Age range' => '3–99 years',
+                    'Additional measurements' => 'Blood pressure, SpO₂, spirometry, ultrasonic height',
+                    'Reporting' => 'On-screen, print, QR, free mobile app',
+                ],
+            ],
+            [
+                'slug' => 'm3',
+                'code' => 'M3',
+                'name' => 'Anovator M3',
+                'tag' => 'Professional & Connected',
+                'headline' => 'Professional system for assessment, consultation, and follow-up',
+                'summary' => 'A balanced solution for facilities that want to extend assessment beyond body composition analysis, with connectivity for consultation and regular follow-up.',
+                'ideal' => 'Professional follow-up',
+                'display' => '32" IPS HD (1920 × 1080)',
+                'method' => '8-point BIA',
+                'frequencies' => '20 / 100 kHz',
+                'weight' => '50 kg',
+                'range' => '0–200 kg',
+                'extra' => 'Blood pressure + SpO₂',
+                'features' => [
+                    'Beyond Body Composition',
+                    'Consultation Support',
+                    'Professional System',
+                    'Regular Follow-Up',
+                ],
+                'specs' => [
+                    'Display' => '32" IPS HD touch (1920 × 1080)',
+                    'Measurement method' => '8-electrode multi-frequency BIA',
+                    'Frequencies' => '20 / 100 kHz',
+                    'Weight' => '50 kg',
+                    'Measuring range' => '0–200 kg',
+                    'Age range' => '3–99 years',
+                    'Additional measurements' => 'Blood pressure + SpO₂',
+                    'Reporting' => 'Phone / paper print / web',
+                ],
+            ],
+            [
+                'slug' => 'm1',
+                'code' => 'M1',
+                'name' => 'Anovator M1',
+                'tag' => 'Compact & Practical',
+                'headline' => 'Purpose-built assessment and progress tracking',
+                'summary' => 'Combines body composition analysis, external measurements, and posture assessment, with visit-to-visit comparison for ongoing progress monitoring.',
+                'ideal' => 'Fitness & wellness',
+                'display' => '10.1" IPS (1920 × 1200)',
+                'method' => '8-point BIA',
+                'frequencies' => '50 / 250 kHz',
+                'weight' => '8 kg',
+                'range' => '5–300 kg',
+                'extra' => 'Posture assessment',
+                'features' => [
+                    'Body Composition Analysis',
+                    'External Measurements',
+                    'Posture Assessment',
+                    'Track Changes & Compare Progress',
+                ],
+                'specs' => [
+                    'Display' => '10.1" IPS (1920 × 1200)',
+                    'Measurement method' => '8-electrode multi-frequency BIA',
+                    'Frequencies' => '50 / 250 kHz',
+                    'Weight' => '8 kg',
+                    'Measuring range' => '5–300 kg',
+                    'Age range' => '3–99 years',
+                    'Additional measurements' => 'AI-supported posture assessment',
+                    'Reporting' => 'On-screen, printable, cloud history',
+                ],
+            ],
+            [
+                'slug' => 'm0',
+                'code' => 'M0',
+                'name' => 'Anovator M0',
+                'tag' => 'Smart & Compact',
+                'headline' => 'Essential body composition analysis for everyday use',
+                'summary' => 'A practical, space-saving system for facilities focused on essential body composition analysis in daily professional workflows.',
+                'ideal' => 'Entry level',
+                'display' => '10.1" IPS HD',
+                'method' => '8-point BIA',
+                'frequencies' => '20 / 100 kHz',
+                'weight' => '45 kg',
+                'range' => '0–200 kg',
+                'extra' => '—',
+                'features' => [
+                    'Essential Body Composition Analysis',
+                    'Compact Design',
+                    'Space-Saving System',
+                    'Everyday Use',
+                ],
+                'specs' => [
+                    'Display' => '10.1" IPS HD touch',
+                    'Measurement method' => '8-electrode multi-frequency BIA',
+                    'Frequencies' => '20 / 100 kHz',
+                    'Weight' => '45 kg',
+                    'Measuring range' => '0–200 kg',
+                    'Age range' => '3–99 years',
+                    'Additional measurements' => 'Core body composition metrics',
+                    'Reporting' => 'Phone / paper print / web',
+                ],
+            ],
+            [
+                'slug' => 'p5',
+                'code' => 'P5',
+                'name' => 'Anovator P5',
+                'tag' => 'Athletic & Dynamic',
+                'headline' => 'Advanced sports performance assessment',
+                'summary' => 'Anovator P5 is designed for facilities that want to go beyond standard body composition assessment and integrate performance testing into a single, advanced workflow. It supports smarter training decisions, broader physical assessments, and structured performance follow-up over time.',
+                'ideal' => 'Sports performance',
+                'display' => '27" 4K (4096 × 2160)',
+                'method' => '8-point BIA + AI vision',
+                'frequencies' => '20 / 100 / 250 kHz',
+                'weight' => '—',
+                'range' => '10–250 kg',
+                'extra' => 'Grip strength, power tests, exercise safety',
+                'features' => [
+                    'Sports Performance Assessment',
+                    'Physical Performance Testing',
+                    'Training Decision Support',
+                    'Performance Follow-Up',
+                ],
+                'specs' => [
+                    'Display' => '27" 4K touch (4096 × 2160)',
+                    'Measurement method' => '8-electrode multi-frequency BIA + 20MP AI vision',
+                    'Frequencies' => '20 / 100 / 250 kHz',
+                    'Measuring range' => '10–250 kg',
+                    'AI vision system' => '20MP camera, skeletal tracking, body segmentation',
+                    'Assessment functions' => 'Body composition, posture, grip strength, upper-body strength, lower-body power, vital capacity, exercise safety, balance, agile response',
+                    'Device dimensions' => '870 × 550 × 1800 mm',
+                    'External interface' => 'USB Host ×2, LAN ×1',
+                    'Power consumption' => '60 W',
+                    'Working distance' => '1 m',
+                    'Reporting' => 'Digital & printed reports',
+                ],
+            ],
+            [
+                'slug' => 'm2-pro',
+                'code' => 'M2 Pro',
+                'name' => 'Anovator M2 Pro',
+                'tag' => 'Visual & Measurable',
+                'headline' => '360° 3D imaging for body changes',
+                'summary' => 'Anovator M2 Pro is designed for facilities that want to document external body changes through 360° 3D imaging and precise measurements. It provides clear visual documentation that supports consultations and makes physical changes easier to present and explain.',
+                'ideal' => 'Visual documentation',
+                'display' => '21.5" IPS HD (1920 × 1080)',
+                'method' => 'DSM-BIA + AI 3D vision',
+                'frequencies' => '20 / 100 / 250 kHz',
+                'weight' => '—',
+                'range' => '—',
+                'extra' => '360° 3D imaging, posture, shoulder mobility',
+                'features' => [
+                    '360° 3D Body Imaging',
+                    'Precise Body Measurements',
+                    'Visual Documentation',
+                    'Clearer Presentation of Changes',
+                ],
+                'specs' => [
+                    'Display' => '21.5" IPS HD touch (1920 × 1080)',
+                    'Measurement method' => 'Direct segmental multi-frequency BIA (DSM-BIA)',
+                    'Frequencies' => '20 / 100 / 250 kHz',
+                    '3D imaging' => 'AI binocular 3D visual recognition, 360° body imaging',
+                    'Assessment functions' => 'Body composition, body dimensions, posture, 360° 3D imaging, shoulder mobility, weight',
+                    'Device dimensions' => '447 × 346 × 1634 mm',
+                    'Electric current' => '< 280 µA',
+                    'Operating system' => 'Android',
+                    'Reporting' => 'Digital & printed reports',
+                ],
+            ],
+        ];
+    }
+}

@@ -5,14 +5,12 @@
 
 @section('content')
 @php
-    $stagePhotos = [
-        'a5' => 'products/a5/1.png',
-        'm3' => 'products/m3/1.png',
-        'm1' => 'products/m1/1.png',
-        'm0' => 'products/m0/1.png',
-        'p5' => 'products/p5/1.png',
-        'm2-pro' => 'products/m2-pro/1.png',
-    ];
+    $stagePhotos = [];
+    foreach (['a5', 'm3', 'm1', 'm0', 'p5', 'm2-pro'] as $slug) {
+        $stagePhotos[$slug] = file_exists(public_path('images/products/'.$slug.'/1.jpg'))
+            ? 'products/'.$slug.'/1.jpg'
+            : 'products/'.$slug.'/1.png';
+    }
     $stage = $stagePhotos[$product['slug']] ?? 'products/a5/1.png';
 @endphp
 <section class="page-hero has-photo" style="background-image:url('{{ asset('images/photos/hero-bg.jpg') }}')">
@@ -25,7 +23,7 @@
 <section class="page-wrap">
     <div class="product-detail">
         <div class="page-figure product-stage">
-            <img src="{{ asset('images/'.$stage) }}?v=4" alt="{{ $product['name'] }}" loading="lazy">
+            <img src="{{ asset('images/'.$stage) }}?v=10" alt="{{ $product['name'] }}" loading="lazy" decoding="async">
         </div>
         <div class="prose">
             <p>{{ $product['summary'] }}</p>

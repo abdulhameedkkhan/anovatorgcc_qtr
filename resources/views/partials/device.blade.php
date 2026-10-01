@@ -9,12 +9,16 @@
         'm2-pro' => 'Anovator M2 Pro',
     ];
     $label = $labels[$model] ?? ('Anovator '.strtoupper($model));
+    $png = public_path('images/products/'.$model.'/1.png');
+    $jpg = public_path('images/products/'.$model.'/1.jpg');
+    $file = file_exists($jpg) ? '1.jpg' : '1.png';
 @endphp
 <img
     class="device device-photo device-{{ $model }}"
-    src="{{ asset('images/products/'.$model.'/1.png') }}?v=5"
+    src="{{ asset('images/products/'.$model.'/'.$file) }}?v=10"
     alt="{{ $label }}"
     width="320"
     height="500"
     loading="lazy"
+    decoding="async"
 >
